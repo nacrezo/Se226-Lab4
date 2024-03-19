@@ -1,0 +1,74 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+public:
+    Node* next;
+    int data;
+
+    Node(int d, Node* n) {
+    next = n;
+    data = d;
+    }
+};
+
+class Stack {
+private:
+    Node* top;
+
+public:
+    Stack() {
+        top = nullptr;
+    }
+
+    bool isEmpty() {
+    return top == nullptr;
+    }
+
+    int push(int x) {
+        Node* newNode = new Node(x, nullptr);
+
+        if(isEmpty()) {
+            top = newNode;
+        }
+
+        else {
+            newNode->next = top;
+            top = newNode;
+        }
+    }
+
+    void pop() {
+        if(!isEmpty()) {
+            top = top->next;
+        }
+    }
+
+    int getTop() {
+        return top->data;
+    }
+
+    void print() {
+
+        while(!isEmpty()) {
+            cout << getTop() << " " ;
+            pop();
+        }
+
+        cout<< endl;
+    }
+};
+
+
+int main()
+{
+    Stack* node = new Stack();
+    node->push(1);
+    node->push(2);
+    node->push(3);
+    node->pop();
+    node->print();
+
+    return 0;
+}
